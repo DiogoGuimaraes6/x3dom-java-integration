@@ -1,0 +1,212 @@
+import java.awt.*; // Imports
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
+public class main {
+
+
+    public static void main(String args[]) {
+        int opcao, n_objetos = 0, numero_objetos,i=0, solido_escolhido, opcao_menu;
+        String html_solido = "";
+        Scanner scan = new Scanner(System.in);
+        solidos[] ListaObjetos = null;
+
+               System.out.println("Quantos objectos quer introduzir?");
+                n_objetos = scan.nextInt(); //Saber quantos objectos  o utilizador quer fazer
+                numero_objetos = n_objetos; //Igual a variavel numero_objetos a n_objetos
+                ListaObjetos = new solidos [n_objetos];
+                for ( i = 0; i < numero_objetos; i++) { //Ciclo que corre enquanto ainda houver objetos a criar
+                    opcao_menu=0;
+                    System.out.println("Faltam " + numero_objetos + " objectos"); //MENU
+                    System.out.println("-------------------------");
+                    System.out.println("1 - Caixa");
+                    System.out.println("2 - Esfera");
+                    System.out.println("3 - Cone");
+                    System.out.println("4 - Cilindro");
+                    System.out.println("0 - Sair");
+                    opcao = scan.nextInt(); //Saber a forma desejada
+                    if (opcao == 1) { //Se a forma for uma caixa, guardar o tamanho
+                        box solido1 = new box();
+                        solido1.setTamanho();
+                        solido1.setXYZ();
+                        System.out.println("Quer textura?(1 - Sim/ 2 - Nao)");
+                        opcao_menu = scan.nextInt();
+                        if(opcao_menu==1) {
+                            solido1.setTextura("Sim");
+                        }
+                        if(opcao_menu==2) {
+                            solido1.setTextura("Nao");
+                            solido1.setRGB();
+                        }
+                        ListaObjetos[i]= solido1;
+                        n_objetos--;
+                    }
+
+                    if (opcao == 2) { //Se a forma for uma esfera
+                        esfera solido1 = new esfera();
+                        solido1.setTamanho();
+                        solido1.setXYZ();
+                        System.out.println("Quer textura?(1 - Sim/ 2 - Nao)");
+                        opcao_menu = scan.nextInt();
+                        if(opcao_menu==1) {
+                            solido1.setTextura("Sim");
+                        }
+                        if(opcao_menu==2) {
+                            solido1.setTextura("Nao");
+                            solido1.setRGB();
+                        }
+                        ListaObjetos[i]= solido1;
+                        n_objetos--;
+
+                    }
+
+                    if (opcao == 3) { //Se a forma for um cone
+                        cone solido1 = new cone();
+                        solido1.setTamanho();
+                        solido1.setXYZ();
+                        System.out.println("Quer textura?(1 - Sim/ 2 - Nao)");
+                        opcao_menu = scan.nextInt();
+                        if(opcao_menu==1) {
+                            solido1.setTextura("Sim");
+                        }
+                        if(opcao_menu==2) {
+                            solido1.setTextura("Nao");
+                            solido1.setRGB();
+                        }
+                        ListaObjetos[i]= solido1;
+                        n_objetos--;
+
+                    }
+
+                    if (opcao == 4) { //Se a forma for um Cilindro
+
+                        cilindro solido1 = new cilindro();
+                        solido1.setTamanho();
+                        solido1.setXYZ();
+                        System.out.println("Quer textura?(1 - Sim/ 2 - Nao)");
+                        opcao_menu = scan.nextInt();
+                        if(opcao_menu==1) {
+                            solido1.setTextura("Sim");
+                        }
+                        if(opcao_menu==2) {
+                            solido1.setTextura("Nao");
+                            solido1.setRGB();
+                        }
+                        ListaObjetos[i]= solido1;
+                        n_objetos--;
+
+                    }
+
+                }
+                for( i =0; i!=50;i=i ) {
+                    opcao_menu=0;
+                    solido_escolhido=0;
+                    System.out.println("1- Criar Ficheiro HTML?");
+                    System.out.println("2 - Editar Ficheiro HTML");
+                    System.out.println("3 - Eliminar Solido");
+                    System.out.println("4 - Sair");
+                    opcao_menu = scan.nextInt(); //Saber a forma desejada
+
+                    if (opcao_menu == 1) {
+                        html_solido="";
+                        for (int a = 0; a < numero_objetos; a++) {
+                            if (ListaObjetos[a] instanceof box) {
+                                box temp = (box) ListaObjetos[a];
+                                html_solido = html_solido + temp.html();
+                            }
+                            if (ListaObjetos[a] instanceof cilindro) {
+                                cilindro temp = (cilindro) ListaObjetos[a];
+                                html_solido = html_solido + temp.html();
+                            }
+                            if (ListaObjetos[a] instanceof esfera) {
+                                esfera temp = (esfera) ListaObjetos[a];
+                                html_solido = html_solido + temp.html();
+                            }
+                            if (ListaObjetos[a] instanceof cone) {
+                                cone temp = (cone) ListaObjetos[a];
+                                html_solido = html_solido + temp.html();
+                            }
+                        }
+                        ficheiro(html_final(html_solido));
+                    }
+
+                    if (opcao_menu == 2) {
+                        System.out.println("Qual objeto quer editar?");
+                        solido_escolhido = scan.nextInt();
+                        solido_escolhido=solido_escolhido-1;
+                        if (solido_escolhido<numero_objetos){
+
+
+                                System.out.println("1-Alterar Cor");
+                                System.out.println("2-Alterar Posicao");
+                                System.out.println("3-Alterar Tamanho");
+                                opcao=scan.nextInt();
+                                if (opcao==1) {
+                                    ListaObjetos[solido_escolhido].setRGB();
+                                }
+                                if (opcao==2) {
+                                    ListaObjetos[solido_escolhido].setXYZ();
+                            }
+
+                            if (opcao==3) {
+                                    if (ListaObjetos[solido_escolhido] instanceof box) {
+                                        box temp = (box) ListaObjetos[solido_escolhido];
+                                        ((box) ListaObjetos[solido_escolhido]).setTamanho();
+                                    }
+
+                                    if (ListaObjetos[solido_escolhido] instanceof cilindro) {
+                                        cilindro temp = (cilindro) ListaObjetos[solido_escolhido];
+                                        ((cilindro) ListaObjetos[solido_escolhido]).setTamanho();
+                                    }
+                                    if (ListaObjetos[solido_escolhido] instanceof esfera) {
+                                        esfera temp = (esfera) ListaObjetos[solido_escolhido];
+                                        ((box) ListaObjetos[solido_escolhido]).setTamanho();
+                                    }
+
+                                    if (ListaObjetos[solido_escolhido] instanceof cone) {
+                                        cone temp = (cone) ListaObjetos[solido_escolhido];
+                                        ((cone) ListaObjetos[solido_escolhido]).setTamanho();
+                                    } } } }
+
+                    if (opcao_menu == 4) {
+                        System.out.println("Saindo");
+                        i=50;
+                    }
+                }
+
+
+
+                }
+
+    static String html_final(String htmlSolido) {
+        String htmlHead = "<html><head><title>Projeto Arquitetura de Sistemas de Computadores </title><script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script> <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link> </head>";
+        String htmlOpenBody = "<body>         <h1>Introdução à Programação - ECGM 2020/2021</h1> <p>  Trabalho Prático - Editor de X3D (linguagem descritiva de mundos virtuais) </p> <x3d width='500px' height='500px'> <scene> ";
+        String htmlClose = "</scene></x3d></body></html>";
+        String HtmlFinal = htmlHead + htmlOpenBody + htmlSolido + htmlClose; //Formar o html final
+        System.out.println(HtmlFinal);
+
+        return HtmlFinal;
+    }
+
+    public static void ficheiro (String A){ //Método para guardar o ficheiro e abrir
+        String desktopPath = System.getProperty("user.home") + "/Desktop"; //Descobrir o path do desktop
+        desktopPath = desktopPath + "\\" + "test.html"; // Igual ao comentario em cima
+        Path path = Paths.get(desktopPath); //Transformar em path
+        byte[] bytes = A.getBytes(); // Transformar em Bytes para guardar
+        try {
+            Files.write(path, bytes);  //Guardar o ficheiro
+        } catch (IOException e) {
+        }
+        try {
+            Desktop.getDesktop().open(new File(desktopPath)); //Abrir o ficheiro
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
