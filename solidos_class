@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class solidos {
+    float r,g,b,x,y,z;
+    Scanner scan = new Scanner(System.in);
+
+    public solidos(){
+        this.x=0;
+        this.y=0;
+        this.z=0;
+        this.r=0;
+        this.g=0;
+        this.z=0;
+    }
+
+    public void setXYZ(){
+
+        System.out.println("Insira a posição desejada para o sólido ");
+        System.out.print("X = ");
+        this.x=scan.nextFloat();
+        System.out.print("Y = ");
+        this.y=scan.nextFloat();
+        System.out.print("Z = ");
+        this.z=scan.nextFloat();
+    }
+
+    public void setRGB(){
+        System.out.println("Insira a cor desejada para o sólido ");
+        System.out.print("R = ");
+        this.r=scan.nextFloat();
+        System.out.print("G = ");
+        this.g=scan.nextFloat();
+        System.out.print("B = ");
+        this.b=scan.nextFloat();
+    }
+
+
+
+
+    float getR(){
+        return r;
+    }
+    float getG(){
+        return g;
+    }
+    float getB(){
+        return b;
+    }
+    float getX(){
+        return x;
+    }
+    float getY(){
+        return y;
+    }
+    float getZ(){
+        return z;
+    }
+
+}
