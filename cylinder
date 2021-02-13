@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class cilindro extends solidos {
+        float raio,altura;
+        String html,textura;
+
+        public cilindro(){
+            this.raio=0;
+            this.altura=0;
+        }
+        void setTamanho() {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Insira o raio e a altura do cilindro ");
+            System.out.print("Raio = ");
+            this.raio=scan.nextFloat();
+            System.out.print("Altura = ");
+            this.altura=scan.nextFloat();
+        }
+        float getRaio(){
+            return raio;
+        }
+        float getAltura(){
+            return altura;
+        }
+        void setTextura(String textura){
+        this.textura=textura;
+        }
+
+        String html(){
+
+            String htmlSolido = "";
+            String html_tamanho = "";
+            String html_color = "<shape> <appearance> <material diffuseColor=" + "'" + getR() + " " + getG() + " " + getB() + "'" + " >";  // Manipular o html para introduizar as cores
+            String html_coordenadas = "<transform translation=" + "'" + getX() + " " + getY() + " " + getZ() + "'>"; //Manipular o html para introduzir as coordenadas
+            if(this.textura=="Sim"){
+                html_tamanho= "<shape> <appearance> <ImageTexture   url=" +"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Capivara%28Hydrochoerus_hydrochaeris%29.jpg/1280px-Capivara%28Hydrochoerus_hydrochaeris%29.jpg" + "><ImageTexture/> </appearance> <Cylinder> </Cylinder> </shape></transform> ";
+                htmlSolido = html_coordenadas + html_tamanho + html_color;
+            }
+            if(this.textura=="Nao"){
+                html_tamanho= "</material></appearance><Cylinder height =" + "'" +getAltura() + "'" + "radius" + "'" +getRaio()+ "' ></Cylinder> </shape> </transform> ";
+                htmlSolido = html_coordenadas + html_color + html_tamanho;
+            }
+            return htmlSolido;
+        }
+
+        public String toString() {
+           // return ("teste" + this.comprimento +"largura" + this.largura + "altura" + this.altura+ "r "+this.r);
+            return ("teste");
+        }
+    }
+
+
